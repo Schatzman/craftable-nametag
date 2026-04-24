@@ -1,31 +1,28 @@
-# Craftable Nametag (Fabric) — **secondary** to the GN data pack
+# Craftable Nametag (Minecraft 1.20.1)
 
-**Canonical source of the recipe (preferred):** the **Minecraft 1.20.1 data pack** in the governance-nexus repository:
+Adds a **shaped** recipe for the vanilla **name tag**: one **top** row, left to right — **iron ingot**, **leather**, **paper** → 1 name tag.
 
-- [`../datapacks/craftable-nametag/`](../datapacks/craftable-nametag/) (same `data/craftable_nametag/recipes/nametag_from_materials.json`, `pack_format` 15)
+## Option A: Data pack (recommended)
 
-Use that folder or a zip of it in each world’s `saves/.../datapacks/`. It needs **no** Fabric API and avoids FAPI-related crafting crashes ([Fabric #3935](https://github.com/FabricMC/fabric/issues/3935)).
+- **No** Fabric Loader, **no** Fabric API, **no** mod JAR. Put the pack in each world’s `saves/<WorldName>/datapacks/` (unzipped folder or `.zip` with the usual structure).
+- **Canonical sources** (same `data/craftable_nametag/.../nametag_from_materials.json`, `pack_format` 15): [governance-nexus: `datapacks/craftable-nametag`](https://github.com/Schatzman/governance-nexus/tree/main/datapacks/craftable-nametag).
 
-This **Gradle project** is optional: it only packages the same JSON as a JAR for players who only install through the Curse “Mods” tab. When building from here, 1.0.2+ **embeds** Fabric API (jar-in-jar). If you use the data pack, you do **not** need this mod.
+In-game, use a crafting table; the three ingredients fill the top row. `/datapack list` should show the pack when it is enabled.
 
----
+## Option B: This mod (optional JAR)
 
-# Original Fabric mod README (build / dev)
+Use this if you only install content through the **mods** folder. The mod ships the same recipe as the data pack, packaged as a Fabric mod.
 
-Minecraft **1.20.1**, **Fabric Loader** ≥ **0.18.4**. Adds a **shaped** recipe for the vanilla name tag: one row, left to right — **iron ingot**, **leather**, **paper**.
+- **Minecraft 1.20.1**, **Fabric Loader** ≥ **0.18.4** (see `fabric.mod.json` / `gradle.properties`).
+- **JAR 1.0.2+** bundles [Fabric API](https://github.com/FabricMC/fabric) via **jar-in-jar** so you do not add a second Fabric API JAR in `mods/`. If you have recipe/crafting-UI issues, remove any duplicate `fabric-api-*.jar` from `mods/`.
 
-**Fabric API (bundled in JARs 1.0.2+):** `META-INF/jars/fabric-api-0.92.8+1.20.1.jar`. Remove duplicate old `fabric-api-*.jar` in `mods/` if you get recipe-UI crashes.
+Troubleshooting: some older Fabric API + crafting-table combinations hit [Fabric #3935](https://github.com/FabricMC/fabric/issues/3935) (`getRecipeRemainder`); the **data pack** path avoids that class of issue entirely.
 
-## Build
+### Build and dev
 
 ```bash
 ./gradlew build
-```
-
-## Develop
-
-```bash
 ./gradlew runClient
 ```
 
-**Top row** of 3×3 grid: **iron ingot** | **leather** | **paper** → **name tag**.
+Output JAR: `build/libs/craftable-nametag-<version>.jar`.
