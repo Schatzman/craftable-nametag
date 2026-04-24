@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "craftable_nametag",
+	"version": "${version}",
+	"name": "Craftable Nametag",
+	"description": "Adds a shaped crafting recipe for the vanilla name tag: iron ingot, leather, paper (one row, left to right).",
+	"authors": [
+		"Governance Nexus"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/craftable_nametag/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.craftable_nametag.CraftableNametagMod"
+		],
+		"client": [
+			"com.craftable_nametag.client.CraftableNametagClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
