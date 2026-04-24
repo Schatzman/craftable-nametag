@@ -32,9 +32,10 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	
+	// Fabric API: on runClient classpath only. Do not declare fabric-api in fabric.mod.json for this
+	// data-only mod — old 1.20.1 FAPI JARs can crash (getRecipeRemainder / Fabric #3935) when crafting with leather.
+	modRuntimeOnly "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
 }
 
 processResources {
